@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # Dịch vụ PostgreSQL
+  postgres:
+    image: postgres:13
+    container_name: sellingcourse_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: DatabaseCourse
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # Dịch vụ ứng dụng Java (Spring Boot)
+  app:
+    build: .
+    container_name: sellingcourse_app
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/DatabaseCourse
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123
+    networks:
+      - sellingcourse_network
+
+volumes:
+  postgres_data:
+
+networks:
+  sellingcourse_network:
+    driver: bridge
