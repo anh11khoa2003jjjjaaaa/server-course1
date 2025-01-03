@@ -1,6 +1,15 @@
 version: '3.8'
 
 services:
+  # Build ứng dụng bằng Maven
+  maven-builder:
+    image: maven:3-openjdk-17
+    container_name: maven_builder
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["mvn", "clean", "package", "-DskipTests"]
+
   # Dịch vụ PostgreSQL
   postgres:
     image: postgres:13
@@ -16,7 +25,9 @@ services:
 
   # Dịch vụ ứng dụng Java (Spring Boot)
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: sellingcourse_app
     depends_on:
       - postgres
