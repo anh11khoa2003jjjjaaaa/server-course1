@@ -19,7 +19,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Sao chép file WAR đã biên dịch từ build stage vào container
-COPY --from=build /app/target/DrComputer-0.0.1-SNAPSHOT.war drcomputer.war
+COPY --from=build /app/target/SellingCourese-0.0.1-SNAPSHOT.war drcomputer.war
 
 # Mở port 8080 để ứng dụng có thể lắng nghe các yêu cầu HTTP
 EXPOSE 8080
