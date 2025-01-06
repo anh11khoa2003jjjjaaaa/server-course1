@@ -87,12 +87,7 @@ public class SecurityConfig {
 //                        })
 //                        .failureUrl("/public/auth/oauth2/failure")
 //                )
-                .oauth2Login(oauth2Login -> oauth2Login
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(oauth2UserService())
-                        )
-                        .successHandler(authenticationSuccessHandler())
-                )
+
 
 
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))  // Áp dụng cấu hình CORS

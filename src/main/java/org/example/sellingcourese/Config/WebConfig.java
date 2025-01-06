@@ -10,6 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // Cấu hình ánh xạ cho thư mục IMG
         registry.addResourceHandler("/video/**")
-                .addResourceLocations("file:///D:/Project/Nam4_hk1/CodeTh/SellingCourese/src/main/java/org/example/sellingcourese/video");
+//                .addResourceLocations("file:///D:/Project/Nam4_hk1/CodeTh/SellingCourese/src/main/java/org/example/sellingcourese/video");
+                .addResourceLocations("file:/app/video/");
     }
 }

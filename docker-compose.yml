@@ -1,7 +1,12 @@
-version: '3.8'
-
 services:
-  # Dịch vụ PostgreSQL
+  maven-builder:
+    image: maven:3-openjdk-17
+    container_name: maven_builder
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["mvn", "clean", "package", "-DskipTests"]
+
   postgres:
     image: postgres:13
     container_name: sellingcourse_postgres
@@ -13,19 +18,29 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - sellingcourse_network
 
-  # Dịch vụ ứng dụng Java (Spring Boot)
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: sellingcourse_app
     depends_on:
-      - postgres
+      maven-builder:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_started
     ports:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/DatabaseCourse
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 123
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+      - ./src/main/java/org/example/sellingcourese/video:/app/video
+      - ./target:/app/target
     networks:
       - sellingcourse_network
 

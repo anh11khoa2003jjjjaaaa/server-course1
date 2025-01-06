@@ -1,10 +1,6 @@
 package org.example.sellingcourese.Service;
 
-import com.nimbusds.jose.shaded.gson.JsonObject;
-import com.nimbusds.jose.shaded.gson.JsonParser;
-import io.jsonwebtoken.io.IOException;
-import org.apache.coyote.Request;
-import org.apache.hc.core5.http2.impl.nio.ClientHttpProtocolNegotiationStarter;
+
 import org.example.sellingcourese.JWT.JwtService;
 import org.example.sellingcourese.Model.Account;
 import org.example.sellingcourese.Model.User;
@@ -16,15 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+
 import java.security.SecureRandom;
 import java.util.*;
 
