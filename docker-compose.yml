@@ -1,4 +1,7 @@
 services:
+
+  # Build ứng dụng bằng Maven
+
   maven-builder:
     image: maven:3-openjdk-17
     container_name: maven_builder
@@ -6,6 +9,9 @@ services:
     volumes:
       - .:/app
     command: ["mvn", "clean", "package", "-DskipTests"]
+
+
+  # Dịch vụ PostgreSQL
 
   postgres:
     image: postgres:13
